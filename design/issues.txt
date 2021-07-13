@@ -1,0 +1,41 @@
+@startuml issues
+skinparam actorStyle awesome
+note "个人事物管理" as issueNote 
+:user: as user
+
+(进入事物列表) as issueList
+
+(查看事物列表) as seeList
+note bottom of seeList
+	列表与单项
+	事物简介
+end note
+(进入单项事物) as enterIssue
+note bottom of enterIssue
+	跳转至相关系统
+	的特性项目页面
+end note
+(事物列表管理) as listManage
+
+issueList --> seeList: <<include>>
+issueList --> enterIssue: <<include>>
+issueList -right-> listManage: <<include>>
+
+(事物排序) as resort 
+(添加标签) as tag 
+(删除事物) as delete 
+(搜索过滤) as filter
+(固定置顶) as pin 
+(标记已读) as markAsReaded 
+
+listManage --> resort: <<include>>
+listManage --> tag: <<include>>
+listManage --> delete: <<include>>
+listManage --> filter: <<include>>
+listManage --> pin: <<include>>
+listManage --> markAsReaded: <<include>>
+
+
+
+user --> issueList
+@enduml

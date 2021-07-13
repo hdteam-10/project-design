@@ -1,0 +1,16 @@
+@startuml userAuth
+skinparam actorStyle awesome
+:用户: as user
+note "登陆" as n
+(login) as login 
+
+user --> login
+
+(user name) as usrname 
+(password) as passwd
+(pin code) as pincode 
+
+login ..> usrname: <<include>>
+login ..> passwd: <<include>>
+login ..> pincode: <<include>>
+@enduml

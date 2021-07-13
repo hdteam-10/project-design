@@ -1,0 +1,38 @@
+@startuml mainpage
+skinparam actorStyle awesome
+note "用户主页" as n
+:User: as user
+
+
+rectangle Mainpage {
+	(登陆主页) as loginMainPage
+	note left of loginMainPage
+		主页包括了显示个人事物列表，
+		个人科研列表，科研动态列表，
+		消息列表，包括导向其他系统的
+		入口
+	end note
+	(用户验证) as usesrAuth
+	(进入项目系统) as enterProject
+	note bottom of enterProject
+		我的科研
+	end note
+	(事物处理) as issues
+	note bottom of issues
+		事物列表，进入需要
+		处理的事物，也是
+		消息列表
+	end note
+	(进入我的团队) as organization
+	note bottom of organization
+		进入个人的组织团队
+	end note
+
+	loginMainPage ..> usesrAuth: <<include>>
+	loginMainPage ..> enterProject: <<include>>
+	loginMainPage ..> issues: <<include>>
+	loginMainPage ..> organization: <<include>>
+}
+
+user -right-> loginMainPage
+@enduml

@@ -1,0 +1,16 @@
+@startuml basicobject
+class user{}
+class project{}
+class organization{}
+class contract{}
+class issues{}
+class fees{}
+class result{}
+
+user "n" .. "1" organization
+project "n" .. "1" organization
+contract "n" .. project
+issues "m" .. "n" user
+fees "m" .. "1" project
+result "m" .. "n" organization
+@enduml
