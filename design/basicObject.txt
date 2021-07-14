@@ -5,14 +5,23 @@ entity user{
 	* Sex: string
 	' todo: more datas to be add
 }
+entity permission {
+	* PermissionID: int <<PK>>
+	* UserID: int <<FK>>
+	* Level: int
+}
+
 entity project{
 	* ProjectID: int <<PK>>
 	* ProjectName: string
 	* ProjectOrganizationID: int <<FK>>
+	* ProjectDescription: text
 }
+
 entity organization{
 	* OrganizationID: int <<PK>>
-	* OrganizationName: string
+	* OrganizationName: text
+	* OrganizationDescription: text
 }
 entity contract{
 	* ContractID: int <<PK>>
@@ -20,22 +29,47 @@ entity contract{
 	* ContractStartDate: date 
 	* ContraceStatus: text 
 	* ContractProjectID: int <<FK>>
-	* 
 }
-entity issues{}
+entity issues{
+	* IssueID: int <<PK>>
+	* IssueMessage: text
+	* IssueReference: text
+	* IssuePersionID: int <<FK>>
+}
 entity funds{
-	
+	* FundID: int <<PK>>
+	* Funds: money 
+	* FundProjectID: int <<FK>>
+	* FundStatus: text
 }
-entity result{}
+entity result{
+	* ResultID: int <<PK>>
+	* ResultName: text
+	* ResultDescription: text
+	* ResultAssetsNum: int
+}
+
+entity assets {
+	* AssetID: int <<PK>>
+	* AssetDescription: text
+	* AssetName: text
+	* AssetFileLocation: text
+}
 
 'note
 'project::ProjectOrganizationID ...* organization::OrganizationID
 'contract::ContractProjectID ...* project::ProjectID
 
-user }|.down.|| organization
-project }|.left.|| organization
-contract  }|.left.|| project
-issues  }|.down.|{  user
-funds  }|.down.||  project
-result  }|.up.|{ organization
+user }|.down.|| organization : in
+project }|.left.|| organization: has
+contract  }|.left.|| project: has
+issues  }|.down.|{  user: sending to
+funds  }|.up.||  project: of
+result  }|.up..|{ organization: relates to
+result ||.right.|{ assets: has
+organization ||..|{ permission
+project ||..|{ permission
+contract ||..|{ permission
+funds ||..|{ permission
+result ||..|{ permission
 @enduml
