@@ -1,16 +1,41 @@
-@startuml basicobject
-class user{}
-class project{}
-class organization{}
-class contract{}
-class issues{}
-class fees{}
-class result{}
+@startuml ERD basic
+entity user{
+	* UserID: int <<PK>>
+	* UserName: string
+	* Sex: string
+	' todo: more datas to be add
+}
+entity project{
+	* ProjectID: int <<PK>>
+	* ProjectName: string
+	* ProjectOrganizationID: int <<FK>>
+}
+entity organization{
+	* OrganizationID: int <<PK>>
+	* OrganizationName: string
+}
+entity contract{
+	* ContractID: int <<PK>>
+	* ContractName: int
+	* ContractStartDate: date 
+	* ContraceStatus: text 
+	* ContractProjectID: int <<FK>>
+	* 
+}
+entity issues{}
+entity funds{
+	
+}
+entity result{}
 
-user "n" .. "1" organization
-project "n" .. "1" organization
-contract "n" .. project
-issues "m" .. "n" user
-fees "m" .. "1" project
-result "m" .. "n" organization
+'note
+'project::ProjectOrganizationID ...* organization::OrganizationID
+'contract::ContractProjectID ...* project::ProjectID
+
+user }|.down.|| organization
+project }|.left.|| organization
+contract  }|.left.|| project
+issues  }|.down.|{  user
+funds  }|.down.||  project
+result  }|.up.|{ organization
 @enduml
