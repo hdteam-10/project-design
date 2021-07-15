@@ -1,0 +1,36 @@
+@startuml projectView
+skinparam actorStyle awesome
+
+:User: as user 
+
+(进入项目页面) as inProjectBoard
+(查看项目列表) as viewProjLists
+(管理项目列表) as manageList
+(进入项目) as enterProject
+
+user --> inProjectBoard
+inProjectBoard ..> viewProjLists: <<include>>
+inProjectBoard ..> manageList: <<include>>
+inProjectBoard ..> enterProject: <<include>>
+
+'manage actions
+(搜索过滤) as filter
+(固定置顶) as pin 
+(新建项目) as newproject
+
+manageList ..> filter: <<include>>
+manageList ..> pin: <<include>>
+manageList ..> newproject: <<include>>
+
+(编辑项目信息) as editInfo
+(管理合同) as contract 
+(管理经费) as funds 
+(管理项目消息) as projectIssues
+(项目设置) as settings
+
+enterProject ..> editInfo
+enterProject ..> contract
+enterProject ..> funds
+enterProject ..> projectIssues
+enterProject ..> settings
+@enduml
