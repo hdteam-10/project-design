@@ -4,6 +4,7 @@ entity user{
 	* UserName: string
 	* Sex: string
 	' todo: more datas to be add
+	test
 }
 entity permission {
 	* PermissionID: int <<PK>>
@@ -47,6 +48,8 @@ entity result{
 	* ResultName: text
 	* ResultDescription: text
 	* ResultAssetsNum: int
+	
+	
 }
 
 entity assets {
