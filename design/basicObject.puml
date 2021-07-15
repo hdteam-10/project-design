@@ -1,4 +1,5 @@
 @startuml ERD basic
+'!theme bluegray
 entity user{
 	* UserID: int <<PK>>
 	* UserName: string
